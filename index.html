@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title>JS</title>
+        <style>
+            .green{
+                background-color: green;
+                color: white;
+            }
+
+            .red{
+                background-color: red;
+                color: white;
+            }
+
+            #myInput{
+                width:500px;
+            }
+
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            let name = "";
+
+            $(function(){  
+                alert("Documento cargado :D");
+            });
+
+            function greeting(){
+                name = $("#myInput").val(); // document.getElementById('myInput')
+                if(name == ""){
+                    alert("Escribe algo");
+                }else{
+                    alert(`Hola ${name}`);
+                }
+            }
+
+            function repeat(){
+                var html = "";
+                for(var i = 0; i < 5; i++){
+                    html += "<b>" + name + "</b>";
+                }
+
+               // $("#container").empty();
+               // $("#container").append(html);
+
+               $("#container").fadeOut(); //hide();
+               $("#container").html(html);
+               setTimeout(() => {  $("#container").fadeIn(); /*.show();*/ }, 2000);
+
+               $("#container").removeClass("red");
+               $("#container").addClass("green");
+            }
+
+            function doAjax(){
+                //$.post
+                $.get('https://api.github.com/users/defunkt', function(data){
+                   console.log(data);
+                   alert(data.login);     
+                });
+            }
+
+            /*
+
+                WITHOUT JQUERY
+                function greeting(){
+                    name = document.getElementById('myInput').value;
+                    if(name == "") 
+                        alert("Escribe algo");
+                    else
+                        alert("Hola!" + name);
+                }
+
+                function repeat(){
+                    var html = "";
+                    for(var i = 0; i < 5; i++){
+                        html += name;
+                    }
+                    document.getElementById('container').innerHTML = html;
+                }
+            
+            */
+        </script>
+    </head>
+    <body>
+        <input type="text" id="myInput" />
+        <button onclick="greeting(); repeat()">Saludar</button>
+        <div id="container" class="red">
+            .
+        </div>
+        <button onclick="doAjax();">Ajax</button>
+
+    </body>
+</html>
